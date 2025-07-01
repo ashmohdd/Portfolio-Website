@@ -6,9 +6,11 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-          dolores numquam iusto Ratione earum ducimus autem id iure pariatur
-          dolorum quae maiores.
+          A data whisperer by day, and Shawarma connoisseur by night 🌮
+          I build dashboards that make numbers talk, automate boring stuff, and turn messy datasets into crystal-clear business insights.
+          Whether it's boosting school performance or optimizing city projects, I love connecting data to real-world impact.
+          Outside of work? I'm outdoorsy, curious, and always learning new things that have nothing to do with data (but somehow always come back to it).
+          Let's make numbers less scary and more powerful.
         </p>
       </div>
     </div>

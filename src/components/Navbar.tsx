@@ -45,13 +45,6 @@ const Navbar = () => {
         <a href="/#" className="navbar-title" data-cursor="disable">
           <img src="/images/Screenshot 2024-01-30 200816-fotor-2024020504519.png" alt="Logo" style={{width: "40px", height: "40px", borderRadius: "50%"}} />
         </a>
-        <a
-          href="mailto:abdulashwaqmohammed@gmail.com"
-          className="navbar-connect"
-          data-cursor="disable"
-        >
-          abdulashwaqmohammed@gmail.com
-        </a>
         <ul>
           <li>
             <a data-href="#about" href="#about">
@@ -61,11 +54,6 @@ const Navbar = () => {
           <li>
             <a data-href="#work" href="#work">
               <HoverLinks text="WORK" />
-            </a>
-          </li>
-          <li>
-            <a data-href="#contact" href="#contact">
-              <HoverLinks text="CONTACT" />
             </a>
           </li>
         </ul>
