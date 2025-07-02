@@ -6,11 +6,7 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          A data whisperer by day, and Shawarma connoisseur by night 🌮
-          I build dashboards that make numbers talk, automate boring stuff, and turn messy datasets into crystal-clear business insights.
-          Whether it's boosting school performance or optimizing city projects, I love connecting data to real-world impact.
-          Outside of work? I'm outdoorsy, curious, and always learning new things that have nothing to do with data (but somehow always come back to it).
-          Let's make numbers less scary and more powerful.
+          I build dashboards that make numbers talk (and trust me, they have opinions), automate the boring stuff because life's too short for manual data entry, and turn messy datasets into crystal-clear business insights that don't require a PhD to understand. Whether it's optimizing city projects or figuring out why the coffee machine usage spikes every Tuesday at 2:47 PM, I love connecting data to real-world impact that actually helps people. Outside of work, I'm outdoorsy, endlessly curious, and always learning random new things that allegedly have nothing to do with data (spoiler alert: they somehow always circle back to it – I might start learning pottery and end up analyzing clay moisture content patterns, it's a gift really). Let's make numbers less scary and more powerful, one insight at a time.
         </p>
       </div>
     </div>
