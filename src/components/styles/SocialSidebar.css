@@ -9,7 +9,7 @@
 .social-sidebar-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   padding: 20px 0;
 }
 
@@ -19,11 +19,11 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  color: #fff;
-  font-size: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 22px;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   position: relative;
@@ -33,7 +33,7 @@
 .social-sidebar-link::after {
   content: attr(title);
   position: absolute;
-  left: 60px;
+  left: 65px;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.9);
@@ -47,12 +47,13 @@
   transition: all 0.3s ease;
   pointer-events: none;
   z-index: 1001;
+  font-weight: 500;
 }
 
 .social-sidebar-link::before {
   content: '';
   position: absolute;
-  left: 55px;
+  left: 60px;
   top: 50%;
   transform: translateY(-50%);
   width: 0;
@@ -73,28 +74,45 @@
 }
 
 .social-sidebar-link:hover {
-  transform: translateX(5px);
+  transform: translateX(8px);
   color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
+/* GitHub - Dark Gray */
 .social-sidebar-link:nth-child(1):hover {
   background: #333;
   border-color: #333;
+  color: #fff;
 }
 
+/* LinkedIn - LinkedIn Blue */
 .social-sidebar-link:nth-child(2):hover {
   background: #0077b5;
   border-color: #0077b5;
+  color: #fff;
 }
 
+/* X (Twitter) - Black */
 .social-sidebar-link:nth-child(3):hover {
-  background: #00ab6c;
-  border-color: #00ab6c;
+  background: #000;
+  border-color: #000;
+  color: #fff;
 }
 
+/* Instagram - Instagram Gradient */
 .social-sidebar-link:nth-child(4):hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-color: #e6683c;
+  color: #fff;
+}
+
+/* Email - Gmail Red */
+.social-sidebar-link:nth-child(5):hover {
   background: #ea4335;
   border-color: #ea4335;
+  color: #fff;
 }
 
 @media only screen and (max-width: 1024px) {

@@ -1,4 +1,5 @@
-import { FaGithub, FaLinkedinIn, FaMedium, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn, FaEnvelope, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import "./styles/SocialSidebar.css";
 
 const SocialSidebar = () => {
@@ -14,14 +15,19 @@ const SocialSidebar = () => {
       label: "LinkedIn"
     },
     {
-      icon: <FaMedium />,
-      url: "https://medium.com/@abdulashwaq12",
-      label: "Medium"
+      icon: <FaXTwitter />,
+      url: "https://twitter.com/abdulashwaq",
+      label: "X (Twitter)"
+    },
+    {
+      icon: <FaInstagram />,
+      url: "https://instagram.com/abdulashwaq",
+      label: "Instagram"
     },
     {
       icon: <FaEnvelope />,
       url: "mailto:abdulashwaqmohammed@gmail.com",
-      label: "Gmail"
+      label: "Email"
     }
   ];
 
