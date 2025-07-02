@@ -26,11 +26,53 @@
   font-size: 20px;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  position: relative;
+  cursor: pointer;
+}
+
+.social-sidebar-link::after {
+  content: attr(title);
+  position: absolute;
+  left: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.social-sidebar-link::before {
+  content: '';
+  position: absolute;
+  left: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.social-sidebar-link:hover::after,
+.social-sidebar-link:hover::before {
+  opacity: 1;
+  visibility: visible;
 }
 
 .social-sidebar-link:hover {
-  background: var(--accentColor);
-  border-color: var(--accentColor);
   transform: translateX(5px);
   color: #fff;
 }
