@@ -43,47 +43,40 @@ export const handleHeadRotation = (
   lerp: (x: number, y: number, t: number) => number
 ) => {
   if (!headBone) return;
-  
   if (window.scrollY < 200) {
-    const maxRotation = Math.PI / 8; // Reduced rotation for more natural movement
-    
-    // Horizontal rotation (left-right)
+    const maxRotation = Math.PI / 6;
     headBone.rotation.y = lerp(
       headBone.rotation.y,
       mouseX * maxRotation,
       interpolationY
     );
-    
-    // Vertical rotation (up-down) with limits
-    let minRotationX = -0.2;
-    let maxRotationX = 0.3;
-    
+    let minRotationX = -0.3;
+    let maxRotationX = 0.4;
     if (mouseY > minRotationX) {
       if (mouseY < maxRotationX) {
         headBone.rotation.x = lerp(
           headBone.rotation.x,
-          -mouseY * maxRotation * 0.5,
+          -mouseY - 0.5 * maxRotation,
           interpolationX
         );
       } else {
         headBone.rotation.x = lerp(
           headBone.rotation.x,
-          -maxRotationX * maxRotation * 0.5,
+          -maxRotation - 0.5 * maxRotation,
           interpolationX
         );
       }
     } else {
       headBone.rotation.x = lerp(
         headBone.rotation.x,
-        -minRotationX * maxRotation * 0.5,
+        -minRotationX - 0.5 * maxRotation,
         interpolationX
       );
     }
   } else {
-    // When scrolled, look slightly down and to the side
     if (window.innerWidth > 1024) {
-      headBone.rotation.x = lerp(headBone.rotation.x, -0.2, 0.03);
-      headBone.rotation.y = lerp(headBone.rotation.y, -0.15, 0.03);
+      headBone.rotation.x = lerp(headBone.rotation.x, -0.4, 0.03);
+      headBone.rotation.y = lerp(headBone.rotation.y, -0.3, 0.03);
     }
   }
 };

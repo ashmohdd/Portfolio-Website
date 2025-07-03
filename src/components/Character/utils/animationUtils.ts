@@ -1,120 +1,118 @@
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
+import { eyebrowBoneNames, typingBoneNames } from "../../../data/boneData";
 
 const setAnimations = (gltf: GLTF) => {
   let character = gltf.scene;
   let mixer = new THREE.AnimationMixer(character);
-  
-  // Check if the character has animations
-  if (gltf.animations && gltf.animations.length > 0) {
-    // Play available animations
-    gltf.animations.forEach((clip, index) => {
-      const action = mixer.clipAction(clip);
-      if (index === 0) {
-        // Play the first animation as the main idle animation
-        action.play();
+  if (gltf.animations) {
+    const introClip = gltf.animations.find(
+      (clip) => clip.name === "introAnimation"
+    );
+    const introAction = mixer.clipAction(introClip!);
+    introAction.setLoop(THREE.LoopOnce, 1);
+    introAction.clampWhenFinished = true;
+    introAction.play();
+    const clipNames = ["key1", "key2", "key5", "key6"];
+    clipNames.forEach((name) => {
+      const clip = THREE.AnimationClip.findByName(gltf.animations, name);
+      if (clip) {
+        const action = mixer?.clipAction(clip);
+        action!.play();
+        action!.timeScale = 1.2;
+      } else {
+        console.error(`Animation "${name}" not found`);
       }
     });
-  } else {
-    // Create a simple breathing animation for characters without animations
-    const breathingAnimation = createBreathingAnimation(character);
-    if (breathingAnimation) {
-      const action = mixer.clipAction(breathingAnimation);
-      action.play();
+    let typingAction: THREE.AnimationAction | null = null;
+    typingAction = createBoneAction(gltf, mixer, "typing", typingBoneNames);
+    if (typingAction) {
+      typingAction.enabled = true;
+      typingAction.play();
+      typingAction.timeScale = 1.2;
     }
   }
-
   function startIntro() {
-    // Simple intro animation - scale up from 0
-    const introTween = new THREE.Vector3(0, 0, 0);
-    character.scale.copy(introTween);
-    
-    const animate = () => {
-      introTween.lerp(new THREE.Vector3(2.2, 2.2, 2.2), 0.05);
-      character.scale.copy(introTween);
-      
-      if (introTween.length() < 2.1) {
-        requestAnimationFrame(animate);
-      }
-    };
-    
+    const introClip = gltf.animations.find(
+      (clip) => clip.name === "introAnimation"
+    );
+    const introAction = mixer.clipAction(introClip!);
+    introAction.clampWhenFinished = true;
+    introAction.reset().play();
     setTimeout(() => {
-      animate();
-    }, 1000);
+      const blink = gltf.animations.find((clip) => clip.name === "Blink");
+      mixer.clipAction(blink!).play().fadeIn(0.5);
+    }, 2500);
   }
-
   function hover(gltf: GLTF, hoverDiv: HTMLDivElement) {
+    let eyeBrowUpAction = createBoneAction(
+      gltf,
+      mixer,
+      "browup",
+      eyebrowBoneNames
+    );
     let isHovering = false;
-    
+    if (eyeBrowUpAction) {
+      eyeBrowUpAction.setLoop(THREE.LoopOnce, 1);
+      eyeBrowUpAction.clampWhenFinished = true;
+      eyeBrowUpAction.enabled = true;
+    }
     const onHoverFace = () => {
-      if (!isHovering) {
+      if (eyeBrowUpAction && !isHovering) {
         isHovering = true;
-        // Simple hover effect - slight scale increase
-        character.scale.setScalar(2.3);
+        eyeBrowUpAction.reset();
+        eyeBrowUpAction.enabled = true;
+        eyeBrowUpAction.setEffectiveWeight(4);
+        eyeBrowUpAction.fadeIn(0.5).play();
       }
     };
-
     const onLeaveFace = () => {
-      if (isHovering) {
+      if (eyeBrowUpAction && isHovering) {
         isHovering = false;
-        // Return to normal scale
-        character.scale.setScalar(2.2);
+        eyeBrowUpAction.fadeOut(0.6);
       }
     };
-
     if (!hoverDiv) return;
     hoverDiv.addEventListener("mouseenter", onHoverFace);
     hoverDiv.addEventListener("mouseleave", onLeaveFace);
-    
     return () => {
       hoverDiv.removeEventListener("mouseenter", onHoverFace);
       hoverDiv.removeEventListener("mouseleave", onLeaveFace);
     };
   }
-
   return { mixer, startIntro, hover };
 };
 
-// Create a simple breathing animation for characters without built-in animations
-const createBreathingAnimation = (character: THREE.Object3D): THREE.AnimationClip | null => {
-  try {
-    const tracks: THREE.KeyframeTrack[] = [];
-    
-    // Find the chest or main body part
-    let targetBone: THREE.Object3D | null = null;
-    character.traverse((child) => {
-      if (child.name.toLowerCase().includes('chest') || 
-          child.name.toLowerCase().includes('spine') ||
-          child.name.toLowerCase().includes('body')) {
-        targetBone = child;
-      }
-    });
-    
-    if (!targetBone) {
-      targetBone = character; // Use the whole character if no specific bone found
-    }
-    
-    // Create breathing animation keyframes
-    const times = [0, 1, 2];
-    const values = [
-      1, 1, 1,     // Normal scale
-      1.02, 1.02, 1.02, // Slightly larger (inhale)
-      1, 1, 1      // Back to normal (exhale)
-    ];
-    
-    const scaleTrack = new THREE.VectorKeyframeTrack(
-      targetBone.name + '.scale',
-      times,
-      values
-    );
-    
-    tracks.push(scaleTrack);
-    
-    return new THREE.AnimationClip('breathing', 2, tracks);
-  } catch (error) {
-    console.warn('Could not create breathing animation:', error);
+const createBoneAction = (
+  gltf: GLTF,
+  mixer: THREE.AnimationMixer,
+  clip: string,
+  boneNames: string[]
+): THREE.AnimationAction | null => {
+  const AnimationClip = THREE.AnimationClip.findByName(gltf.animations, clip);
+  if (!AnimationClip) {
+    console.error(`Animation "${clip}" not found in GLTF file.`);
     return null;
   }
+
+  const filteredClip = filterAnimationTracks(AnimationClip, boneNames);
+
+  return mixer.clipAction(filteredClip);
+};
+
+const filterAnimationTracks = (
+  clip: THREE.AnimationClip,
+  boneNames: string[]
+): THREE.AnimationClip => {
+  const filteredTracks = clip.tracks.filter((track) =>
+    boneNames.some((boneName) => track.name.includes(boneName))
+  );
+
+  return new THREE.AnimationClip(
+    clip.name + "_filtered",
+    clip.duration,
+    filteredTracks
+  );
 };
 
 export default setAnimations;
