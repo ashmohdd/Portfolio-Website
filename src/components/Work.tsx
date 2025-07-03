@@ -12,7 +12,7 @@ const projects = [
     category: "Machine Learning",
     description: "Classifies customers likely to leave using ML models",
     tools: "Python, Scikit-learn, Pandas, Matplotlib",
-    image: "/images/img1.png",
+    image: "/images/customer-churn.png",
     link: "https://github.com/ashmohdd/Customer-Churn-Prediction"
   },
   {
@@ -28,7 +28,7 @@ const projects = [
     category: "NLP & ML",
     description: "NLP & logistic regression to predict Kickstarter success",
     tools: "Python, NLP, Logistic Regression, Text Analysis",
-    image: "/images/img4.jpg",
+    image: "/images/img6.jpg",
     link: "https://github.com/ashmohdd/Crowdfunding-Success-Prediction"
   },
   {
@@ -36,7 +36,7 @@ const projects = [
     category: "Data Analytics",
     description: "Dashboard of danceability, energy & trends in top 2023 hits",
     tools: "Python, Pandas, Plotly, Data Visualization",
-    image: "/images/img6.jpg",
+    image: "/images/img4.jpg",
     link: "https://github.com/ashmohdd/Analysis-of-the-Top-Spotify-Songs-in-2023-by-Streaming-Numbers"
   },
   {

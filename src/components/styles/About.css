@@ -8,6 +8,8 @@
   height: auto;
   width: var(--cWidth);
   margin: auto;
+  min-height: 100vh;
+  padding: 50px 0;
 }
 .about-me {
   padding: 50px 0px;
@@ -21,13 +23,19 @@
   letter-spacing: 7px;
   font-weight: 400;
   color: var(--accentColor);
+  margin-bottom: 30px;
 }
 
-.about-me p {
+.about-me .para p {
   font-size: 33px;
   font-weight: 600;
   line-height: 36px;
   letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+.about-me .para p:last-child {
+  margin-bottom: 0;
 }
 
 @media only screen and (min-width: 600px) {
@@ -53,19 +61,66 @@
     height: var(--vh);
     padding: 0px;
     opacity: 1;
+    min-height: auto;
   }
   .about-me {
     padding: 0px;
     width: 50%;
   }
-  .about-me p {
+  .about-me .para p {
     font-size: 1.9vw;
     line-height: 2.3vw;
   }
 }
 @media only screen and (min-width: 1950px) {
-  .about-me p {
+  .about-me .para p {
     font-size: 2.5rem;
     line-height: 2.7rem;
+  }
+}
+
+/* Mobile specific fixes */
+@media only screen and (max-width: 1024px) {
+  .about-section {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10 !important;
+    background-color: var(--backgroundColor);
+    padding: 80px 0;
+  }
+  
+  .about-me {
+    width: 100%;
+    max-width: calc(100% - 30px);
+    margin: 0 auto;
+  }
+  
+  .about-me .para p {
+    font-size: 18px !important;
+    line-height: 24px !important;
+    font-weight: 500;
+  }
+  
+  .about-me h3 {
+    font-size: 20px;
+    letter-spacing: 3px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .about-section {
+    padding: 60px 0;
+  }
+  
+  .about-me .para p {
+    font-size: 16px !important;
+    line-height: 22px !important;
+  }
+  
+  .about-me h3 {
+    font-size: 18px;
+    letter-spacing: 2px;
   }
 }

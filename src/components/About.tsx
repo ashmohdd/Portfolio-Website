@@ -5,9 +5,17 @@ const About = () => {
     <div className="about-section" id="about">
       <div className="about-me">
         <h3 className="title">About Me</h3>
-        <p className="para">
-          I build dashboards that make numbers talk (and trust me, they have opinions), automate the boring stuff because life's too short for manual data entry, and turn messy datasets into crystal-clear business insights that don't require a PhD to understand. Whether it's optimizing city projects or figuring out why the coffee machine usage spikes every Tuesday at 2:47 PM, I love connecting data to real-world impact that actually helps people. Outside of work, I'm outdoorsy, endlessly curious, and always learning random new things that allegedly have nothing to do with data (spoiler alert: they somehow always circle back to it – I might start learning pottery and end up analyzing clay moisture content patterns, it's a gift really). Let's make numbers less scary and more powerful, one insight at a time.
-        </p>
+        <div className="para">
+          <p>
+            I build dashboards that make numbers talk (and trust me, they have opinions). I automate the boring stuff because life's too short for manual data entry, and turn messy datasets into crystal-clear insights that don't require a PhD to understand.
+          </p>
+          <p>
+            Whether I'm optimizing city projects or investigating why coffee machine usage spikes every Tuesday at 2:47 PM, I love connecting data to real-world impact that actually helps people. Outside of work, I'm that person who somehow finds patterns in everything – hiking trails, pizza topping preferences, the way my neighbors walk their dogs. I can't help it; my brain just sees the world in spreadsheets now.
+          </p>
+          <p>
+            Let's make numbers less scary and more powerful, one insight at a time.
+          </p>
+        </div>
       </div>
     </div>
   );
